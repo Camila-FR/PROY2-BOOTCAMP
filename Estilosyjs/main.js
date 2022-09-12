@@ -1,27 +1,43 @@
 //Constantes 
 
 const listagastos=[];
-var datogasto= {
-    item: "",
-    descripcion: "",
-    fecha: "",
-    monto: "",
+
+const presupuestos=[];
+
+//local storage
+
+function leerdatos(datos){
+    return JSON.parse(window.localStorage.getItem('datos'))||[];
 }
 
-// ejecucion de funcion boton agregar gasto
+function guadardatosls(datos, data){
+    window.localStorage.setItem(datos,JSON.stringify(data));
+
+}
+// ejecucion de funcion boton agregar gasto en tabla
 
 let buttonAgregar= document.getElementById('agregargasto');
 buttonAgregar.addEventListener('click', (e) => agregargasto(e));
 
 
 function agregargasto (e)
-
 {
+let gastos=leerdatos("gastos");
+
     e.preventDefault();
-    let datosgasto=obtener();
-    insertardatos(datosgasto);
-    listagastos.push(datosgasto);
+    let datogasto=obtener();
     
+    if( datogasto.item=="" || datogasto.descripcion==""||datogasto.fecha==""||datogasto.monto==""){
+        alert("no pueden existir campos vacios");
+    }
+    
+    else if (idgasto.value{
+
+        insertardatos(datogasto);
+        listagastos.push(datogasto);
+        guadardatosls()
+    }
+        
 }
 
 // obtener valores en variable objeto
@@ -34,38 +50,40 @@ function obtener() {
         fecha: document.getElementById('fecha').value,
         monto: document.getElementById('monto').value,
 }
-if( datogasto.item=="" || datogasto.descripcion==""||datogasto.fecha==""||datogasto.monto==""){
-    alert("no pueden existir campos vacios");
-}
-
-else{
-    return datogasto;
-}
+return datogasto;
 
 }
 
-//obtengo el dato, y agrego el gasto en la tabla
-
-
-//datos = obtener
-//validación
-/*let arrayobj=Object.values(gasto)
-if (arrayobj.lengh< 4){
-console.log ("hola")
-}*/
-    
+//Obtener valores de presupuesto
+function obtenerPres() { 
+    var presupuestos= {
+        Vivienda:document.getElementById('presviv').value,
+        Transporte: document.getElementById('prestra').value,
+        Alimentacion: document.getElementById('presali').value,
+        Educacion: document.getElementById('presedu').value,
+        Servicios: document.getElementById('presser').value,
+        Otros: document.getElementById('presotr').value,
+}
+return presupuestos;
+}
+   
 function   insertardatos (gasto){
     
     let selecciontabla=document.getElementById("tabladegasto");
     let nuevafila= selecciontabla.insertRow(-1);
     let nuevacelda1=nuevafila.insertCell(0);
-    nuevacelda1.innerHTML = gasto.item;
+    nuevacelda1.innerHTML = gasto.id;
     let nuevacelda2= nuevafila.insertCell(1);
-    nuevacelda2.innerHTML= gasto.descripcion;
-    let nuevacelda3=nuevafila.insertCell(2);
-    nuevacelda3.innerHTML= gasto.fecha;
+    nuevacelda2.innerHTML= gasto.item;
+    let nuevacelda3= nuevafila.insertCell(2);
+    nuevacelda3.innerHTML= gasto.descripcion;
     let nuevacelda4=nuevafila.insertCell(3);
-    nuevacelda4.innerHTML= gasto.monto;
+    nuevacelda4.innerHTML= gasto.fecha;
+    let nuevacelda5=nuevafila.insertCell(4);
+    nuevacelda5.innerHTML= gasto.monto;
+    let nuevacelda6= nuevafila.insertCell(5);
+    nuevacelda6.innerHTML= `<button class="btn btn-danger">Eliminar</button>
+    <button class="btn btn-secondary">Editar</button>`;
 
 }
 
@@ -73,11 +91,11 @@ function editargasto(){
 
 }
 
-function eliminargasto (boton){
-    boton.parentElement.parentElement.remove();
-    tareas.filter(tarea=>)
+//function eliminargasto (boton){
+ //   boton.parentElement.parentElement.remove();
+   // tareas.filter(tarea=>);
 
-}
+//}
 
 function actualizargasto (){
 
@@ -99,9 +117,58 @@ function limpiarform2(){
     document.getElementById("monto").value = "";
     document.getElementById("fecha").value = "";
 
-
 }
 
-function leertareas(){
-    window.localStorage.getItem('gastos')
+
+
+
+
+//obtengo el dato, y agrego el gasto en la tabla
+
+
+//datos = obtener
+//validación
+/*let arrayobj=Object.values(gasto)
+if (arrayobj.lengh< 4){
+console.log ("hola")
+//}*/
+
+// ejecucion de funcion boton agregar gasto
+
+let buttonAgregarpres= document.getElementById('agregarpres');
+buttonAgregarpres.addEventListener('click', (a) => agregarpres(a));
+
+
+function agregarpres (a)
+
+{
+    a.preventDefault();
+    let presupuesto=obtenerPres();
+    
+    if( presupuesto.Vivienda=="" || presupuesto.Transporte==""||presupuesto.Alimentacion==""||presupuesto.Educacion==""||presupuesto.Otros==""||presupuesto.Servicios==""){
+        alert("no pueden existir campos vacios");
+    }
+    
+    else{
+        let selecvivpres=document.getElementById("vivpres");
+        selecvivpres.innerHTML = `<h5 class="card-title">Vivienda</h5>
+        <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Vivienda}</p>`;
+        let selecedupres=document.getElementById("edupres");
+        selecedupres.innerHTML = `<h5 class="card-title">Educación</h5>
+        <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Educacion}</p>`;
+        let selecalipres=document.getElementById("alipres");
+        selecalipres.innerHTML = `<h5 class="card-title">Alimentación</h5>
+        <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Alimentacion}</p>`;
+        let selecotrpres=document.getElementById("otrpres");
+        selecotrpres.innerHTML = `<h5 class="card-title">Otros</h5>
+        <p class=card-text">Gasto <p>Presupuesto= ${presupuesto.Otros}</p>`;
+        let selecserpres=document.getElementById("serpres");
+        selecserpres.innerHTML = `<h5 class="card-title">Servicios</h5>
+        <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Servicios}</p>`;
+        let selectrapres=document.getElementById("trapres");
+        selectrapres.innerHTML = `<h5 class="card-title">Transporte</h5>
+        <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Transporte}</p>`;
+    };
+        
 }
+

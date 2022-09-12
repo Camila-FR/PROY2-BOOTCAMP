@@ -44,10 +44,11 @@
                 <form action="" class="row flex-wrap">
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-primary mb-3 w-10" onclick="limpiarform1()">Limpiar Formulario</button>
+                        <button type="button" class="btn btn-primary mb-3 w-10" id="agregarpres" onclick="agregarpres()">Actualizar</button>
                     </div>
                     <div class="col-4">
                         <label class="form-label">Vivienda ($)</label>
-                        <input type="num" id="presviv" class="form-control" placeholder="0" aria-label="Amount (to the nearest dollar)" />
+                        <input type="num" id="presviv" class="form-control" name="presupuesto" placeholder="0" aria-label="Amount (to the nearest dollar)" />
                     </div>
                     <div class="col-4">
                         <label class="form-label">Transporte ($)</label>
@@ -91,6 +92,7 @@
                             </button>
                         <button type="button" class="btn btn-primary m-3" onclick="limpiarform2()">Limpiar Formulario</button>
                         </div>
+                        <input type="hidden" id="id" name="id" value="0">
                         <div class="col-3">
                         <label class="form-label">Item</label>
                         <select id="item" class="form-select h-50" id="floatingSelect" aria-label="Floating label select example">
@@ -135,21 +137,21 @@
                 <div class="accordion-body d-flex flex-columns justify-content-center align-items-baseline">
                     <div class="card m-2 align-items-center" style="width: 12rem;">
                         <i class="fa-solid fa-house-user fa-5x"></i>
-                        <div class="card-body">
+                        <div class="card-body" id="vivpres">
                             <h5 class="card-title">Vivienda</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
                         </div>
                     </div>
                     <div class="card m-2  align-items-center" style="width: 12rem;">
                         <i class="fa-solid fa-bus fa-5x"></i>
-                        <div class="card-body">
-                            <h5 class="card-title">Transporte</h5>
+                        <div class="card-body" id="trapres">
+                            <h5 class="card-title" >Transporte</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
                         </div>
                     </div>
                     <div class="card m-2 align-items-center" style="width: 12rem;">
                         <i class="fa-solid fa-school fa-5x"></i>
-                        <div class="card-body">
+                        <div class="card-body"id="edupres">
                             <h5 class="card-title">Educación</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
                         </div>
@@ -157,7 +159,7 @@
 
                     <div class="card m-2 align-items-center" style="width: 12rem;">
                         <i class="fa-solid fa-bowl-food fa-5x"></i>
-                        <div class="card-body">
+                        <div class="card-body"id="alipres">
                             <h5 class="card-title">Alimentación</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
                         </div>
@@ -165,7 +167,7 @@
 
                     <div class="card m-2 align-items-center" style="width: 12rem;">
                         <i class="fa-solid fa-screwdriver-wrench fa-5x"></i>
-                        <div class="card-body">
+                        <div class="card-body"id="serpres">
                             <h5 class="card-title">Servicios Básicos</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
                         </div>
@@ -173,7 +175,7 @@
 
                     <div class="card m-2 align-items-center" style="width: 12rem;">
                         <i class="fa-solid fa-gear fa-5x"></i>
-                        <div class="card-body">
+                        <div class="card-body"id="otrpres">
                             <h5 class="card-title">Otros</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
                         </div>
@@ -189,20 +191,25 @@
         <table class="table" id="tabladegasto">
             <thead>
                 <tr>
-
+                    <th scope="col">#</th>
                     <th scope="col">Item</th>
                     <th scope="col">Descripción del Gasto</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Monto ($)</th>
+                    <th scope="col">Botones</th>
                 </tr>
             </thead>
             <tbody id="filagasto">
                 <tr>
-
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <td>EJ</td>
+                    <td>Vivienda</td>
+                    <td>Arriendo</td>
+                    <td>21-03-2022</td>
                     <td>1000</td>
+                    <td>
+                        <button class="btn btn-danger">Eliminar</button>
+                        <button class="btn btn-secondary">Editar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
