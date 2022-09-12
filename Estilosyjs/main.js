@@ -22,20 +22,30 @@ buttonAgregar.addEventListener('click', (e) => agregargasto(e));
 
 function agregargasto (e)
 {
-let gastos=leerdatos("gastos");
-
     e.preventDefault();
+    let listagastos=leerdatos("listagastos");
     let datogasto=obtener();
     
     if( datogasto.item=="" || datogasto.descripcion==""||datogasto.fecha==""||datogasto.monto==""){
         alert("no pueden existir campos vacios");
     }
     
-    else if (idgasto.value{
+    else if (datogasto.id==0 || datogasto.id==null) {
+        datogasto.id=(listagastos.length +1);
 
         insertardatos(datogasto);
         listagastos.push(datogasto);
-        guadardatosls()
+        
+    }
+    else {
+        // const student = students[idStudent.id-1];
+        let pos = students.findIndex(student => student.id == idStudent.value);
+        if (pos >= 0){
+            students[pos].name = nombre.value;
+            students[pos].lastName = apellido.value;
+            students[pos].age = edad.value;
+        
+    }
     }
         
 }
@@ -44,7 +54,7 @@ let gastos=leerdatos("gastos");
 
 function obtener() { 
     var datogasto= {
-        id:"",
+        id:document.getElementById('id').value,
         item: document.getElementById('item').value,
         descripcion: document.getElementById('descripcion').value,
         fecha: document.getElementById('fecha').value,
