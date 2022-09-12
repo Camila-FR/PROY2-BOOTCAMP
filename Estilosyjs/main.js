@@ -23,7 +23,7 @@ buttonAgregar.addEventListener('click', (e) => agregargasto(e));
 function agregargasto (e)
 {
     e.preventDefault();
-    let listagastos=leerdatos("listagastos");
+    //let listagastos=leerdatos("listagastos");
     let datogasto=obtener();
     
     if( datogasto.item=="" || datogasto.descripcion==""||datogasto.fecha==""||datogasto.monto==""){
@@ -35,7 +35,8 @@ function agregargasto (e)
 
         insertardatos(datogasto);
         listagastos.push(datogasto);
-        
+        guadardatosls("listadegasto", listagastos);
+       
     }
     else {
         // const student = students[idStudent.id-1];
