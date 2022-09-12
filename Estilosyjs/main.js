@@ -7,7 +7,7 @@ const presupuestos=[];
 //local storage
 
 function leerdatos(datos){
-    return JSON.parse(window.localStorage.getItem('datos'))||[];
+    return JSON.parse(window.localStorage.getItem(datos))||[];
 }
 
 function guadardatosls(datos, data){
@@ -33,9 +33,11 @@ function agregargasto (e)
     else if (datogasto.id==0 || datogasto.id==null) {
         datogasto.id=(listagastos.length +1);
 
-        insertardatos(datogasto);
+        
         listagastos.push(datogasto);
         guadardatosls("listadegasto", listagastos);
+
+        insertardatos();
        
     }
     else {
@@ -78,10 +80,24 @@ function obtenerPres() {
 return presupuestos;
 }
    
-function   insertardatos (gasto){
+function   insertardatos (gastos){
     
-    let selecciontabla=document.getElementById("tabladegasto");
-    let nuevafila= selecciontabla.insertRow(-1);
+    let fila=document.getElementById("filagasto");
+    let listagastosls= leerdatos('listadegasto'); 
+    fila.innerHTML="";
+    listagastosls.forEach(element => {    
+    fila.innerHTML+=`<tr>
+    <td> ${element.id} </td>
+    <td> ${element.item} </td>
+    <td> ${element.descripcion} </td>
+    <td> ${element.fecha} </td>
+    <td> ${element.monto} </td>
+    <td><button class="btn btn-danger">Eliminar</button>
+    <button class="btn btn-secondary">Editar</button></td>
+    </tr>`;
+    });
+}
+     /*   let nuevafila= selecciontabla.insertRow(-1);
     let nuevacelda1=nuevafila.insertCell(0);
     nuevacelda1.innerHTML = gasto.id;
     let nuevacelda2= nuevafila.insertCell(1);
@@ -95,8 +111,9 @@ function   insertardatos (gasto){
     let nuevacelda6= nuevafila.insertCell(5);
     nuevacelda6.innerHTML= `<button class="btn btn-danger">Eliminar</button>
     <button class="btn btn-secondary">Editar</button>`;
+        });*/
 
-}
+
 
 function editargasto(){
 
