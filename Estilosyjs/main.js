@@ -26,7 +26,7 @@ function agregargasto (e)
     e.preventDefault();
         
     let datogasto=obtener();
-    
+    //console.log( datogasto.id);
     if( datogasto.item=="" || datogasto.descripcion==""||datogasto.fecha==""||datogasto.monto==""){
         alert("no pueden existir campos vacios");
     }
@@ -34,6 +34,7 @@ function agregargasto (e)
     else if (datogasto.id==0 || datogasto.id==null) {
         datogasto.id=(listagastos.length +1);      
         listagastos.push(datogasto);
+        //console.log( datogasto.id);
        
     }
     else {
@@ -44,7 +45,7 @@ function agregargasto (e)
             listagastos[pos].descripcion = descripcion.value;
             listagastos[pos].fecha = fecha.value;
             listagastos[pos].monto = monto.value;
-        
+        //console.log( datogasto.id);
     }
     }
     guadardatosls("listadegasto", listagastos);
@@ -112,14 +113,17 @@ guadardatosls("listadegasto", listagastos);
 
 }
 
-function editargasto(button, id){
+function editargasto(button, ide){
     let gastos= leerdatos('listadegasto');
-    let gastoeditado = gastos[id -1];
-   
+    let gastoeditado = gastos[ide -1];
+    
+    id.value=gastoeditado.id;
     item.value = gastoeditado.item;
     monto.value = gastoeditado.monto;
     descripcion.value = gastoeditado.descripcion;
     fecha.value = gastoeditado.fecha;
+    //console.log(id.value);
+    //console.log(gastoeditado);
 
 }
 
