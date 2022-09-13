@@ -1,13 +1,14 @@
 //Constantes 
 
-const listagastos=[];
+let listagastos=[];
 
-const presupuestos=[];
+let presupuestos=[];
 
 //local storage
 
 function leerdatos(datos){
     return JSON.parse(window.localStorage.getItem(datos))||[];
+    
 }
 
 function guadardatosls(datos, data){
@@ -23,7 +24,7 @@ buttonAgregar.addEventListener('click', (e) => agregargasto(e));
 function agregargasto (e)
 {
     e.preventDefault();
-    //let listagastos=leerdatos("listagastos");
+        
     let datogasto=obtener();
     
     if( datogasto.item=="" || datogasto.descripcion==""||datogasto.fecha==""||datogasto.monto==""){
@@ -31,32 +32,30 @@ function agregargasto (e)
     }
     
     else if (datogasto.id==0 || datogasto.id==null) {
-        datogasto.id=(listagastos.length +1);
-
-        
+        datogasto.id=(listagastos.length +1);      
         listagastos.push(datogasto);
-        guadardatosls("listadegasto", listagastos);
-
-        insertardatos();
        
     }
     else {
         // const student = students[idStudent.id-1];
-        let pos = students.findIndex(student => student.id == idStudent.value);
+        let pos = listagastos.findIndex(element => element.id == id.value);
         if (pos >= 0){
-            students[pos].name = nombre.value;
-            students[pos].lastName = apellido.value;
-            students[pos].age = edad.value;
+            listagastos[pos].item = item.value;
+            listagastos[pos].descripcion = descripcion.value;
+            listagastos[pos].fecha = fecha.value;
+            listagastos[pos].monto = monto.value;
         
     }
     }
-        
+    guadardatosls("listadegasto", listagastos);
+    insertardatos();
+    limpiarform2();  
 }
 
 // obtener valores en variable objeto
 
 function obtener() { 
-    var datogasto= {
+    let datogasto= {
         id:document.getElementById('id').value,
         item: document.getElementById('item').value,
         descripcion: document.getElementById('descripcion').value,
@@ -80,44 +79,51 @@ function obtenerPres() {
 return presupuestos;
 }
    
-function   insertardatos (gastos){
+function   insertardatos (){
     
     let fila=document.getElementById("filagasto");
-    let listagastosls= leerdatos('listadegasto'); 
+    listagastos= leerdatos('listadegasto'); 
     fila.innerHTML="";
-    listagastosls.forEach(element => {    
+    listagastos.forEach(element => {    
     fila.innerHTML+=`<tr>
     <td> ${element.id} </td>
     <td> ${element.item} </td>
     <td> ${element.descripcion} </td>
     <td> ${element.fecha} </td>
     <td> ${element.monto} </td>
-    <td><button class="btn btn-danger">Eliminar</button>
-    <button class="btn btn-secondary">Editar</button></td>
+    <td><button class="btn btn-danger" onclick="eliminargasto(this,'${element.id}')">Eliminar</button>
+    <button class="btn btn-secondary" onclick="editargasto(this, '${element.id}')">Editar</button></td>
+    
     </tr>`;
     });
 }
-     /*   let nuevafila= selecciontabla.insertRow(-1);
-    let nuevacelda1=nuevafila.insertCell(0);
-    nuevacelda1.innerHTML = gasto.id;
-    let nuevacelda2= nuevafila.insertCell(1);
-    nuevacelda2.innerHTML= gasto.item;
-    let nuevacelda3= nuevafila.insertCell(2);
-    nuevacelda3.innerHTML= gasto.descripcion;
-    let nuevacelda4=nuevafila.insertCell(3);
-    nuevacelda4.innerHTML= gasto.fecha;
-    let nuevacelda5=nuevafila.insertCell(4);
-    nuevacelda5.innerHTML= gasto.monto;
-    let nuevacelda6= nuevafila.insertCell(5);
-    nuevacelda6.innerHTML= `<button class="btn btn-danger">Eliminar</button>
-    <button class="btn btn-secondary">Editar</button>`;
-        });*/
+insertardatos ();
+    
 
+function eliminargasto (button, id){
+button.parentElement.parentElement.remove();
+let gastos= leerdatos('listadegasto');
+listagastos= gastos.filter((element) => element.id != id);
 
-
-function editargasto(){
+console.log(gastos);
+console.log(listagastos);
+console.log(id);
+guadardatosls("listadegasto", listagastos);
 
 }
+
+function editargasto(button, id){
+    let gastos= leerdatos('listadegasto');
+    let gastoeditado = gastos[id -1];
+   
+    item.value = gastoeditado.item;
+    monto.value = gastoeditado.monto;
+    descripcion.value = gastoeditado.descripcion;
+    fecha.value = gastoeditado.fecha;
+
+}
+
+
 
 //function eliminargasto (boton){
  //   boton.parentElement.parentElement.remove();
