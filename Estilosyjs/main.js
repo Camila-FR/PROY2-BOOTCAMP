@@ -187,22 +187,22 @@ function insertarpres(){
     presupuesto= leerdatos('presupuestos'); 
     let selecvivpres=document.getElementById("vivpres");
     selecvivpres.innerHTML = `<h5 class="card-title">Vivienda</h5>
-    <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Vivienda}</p>`;
+    <p class="card-text" id="gas3viv">Gasto <p>Presupuesto= ${presupuesto.Vivienda}</p>`;
     let selecedupres=document.getElementById("edupres");
     selecedupres.innerHTML = `<h5 class="card-title">Educación</h5>
-    <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Educacion}</p>`;
+    <p class="card-text" id="gas3edu">Gasto <p>Presupuesto= ${presupuesto.Educacion}</p>`;
     let selecalipres=document.getElementById("alipres");
     selecalipres.innerHTML = `<h5 class="card-title">Alimentación</h5>
-    <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Alimentacion}</p>`;
+    <p class="card-text" id="gas3ali">Gasto <p>Presupuesto= ${presupuesto.Alimentacion}</p>`;
     let selecotrpres=document.getElementById("otrpres");
     selecotrpres.innerHTML = `<h5 class="card-title">Otros</h5>
-    <p class=card-text">Gasto <p>Presupuesto= ${presupuesto.Otros}</p>`;
+    <p class=card-text" id="gas3otr">Gasto <p>Presupuesto= ${presupuesto.Otros}</p>`;
     let selecserpres=document.getElementById("serpres");
     selecserpres.innerHTML = `<h5 class="card-title">Servicios</h5>
-    <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Servicios}</p>`;
+    <p class="card-text"id="gas3ser">Gasto <p>Presupuesto= ${presupuesto.Servicios}</p>`;
     let selectrapres=document.getElementById("trapres");
     selectrapres.innerHTML = `<h5 class="card-title">Transporte</h5>
-    <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Transporte}</p>`;
+    <p class="card-text" id="gas3tra">Gasto <p>Presupuesto= ${presupuesto.Transporte}</p>`;
     }
 insertarpres();
 
@@ -215,16 +215,29 @@ function insertarfiltergasto(element){
     console.log("funciona boton");
    let gastos3=leerdatos('listadegasto');
    let vVivienda = gastos3.filter((element) => element.item == "Vivienda").reduce((a,b)=> a + Number (b.monto),0);
-   let vTransporte=gastos3.filter((element)=>element.item == "Transporte");
-   let vAlimentacion=gastos3.filter((element)=>element.item == "Alimentacion");
-   let vOtros=gastos3.filter((element)=>element.item == "Otros");
-   let vServicios=gastos3.filter((element)=>element.item =="Servicios");
-   let vEducacion=gastos3.filter((element)=>element.item =="Educacion");
+   let vTransporte=gastos3.filter((element)=>element.item == "Transporte").reduce((a,b)=> a + Number (b.monto),0);
+   let vAlimentacion=gastos3.filter((element)=>element.item == "Alimentacion").reduce((a,b)=> a + Number (b.monto),0);
+   let vOtros=gastos3.filter((element)=>element.item == "Otros").reduce((a,b)=> a + Number (b.monto),0);
+   let vServicios=gastos3.filter((element)=>element.item =="Servicios").reduce((a,b)=> a + Number (b.monto),0);
+   let vEducacion=gastos3.filter((element)=>element.item =="Educacion").reduce((a,b)=> a + Number (b.monto),0);
     
+   let selecvivgas=document.getElementById("gas3viv");
+    selecvivgas.innerHTML = `Gasto= ${vVivienda}`;
+    let selectragas=document.getElementById("gas3tra");
+    selectragas.innerHTML = `Gasto= ${vTransporte}`;
+    let selecaligas=document.getElementById("gas3ali");
+    selecaligas.innerHTML = `Gasto= ${vAlimentacion}`;
+    let selecsergas=document.getElementById("gas3ser");
+    selecsergas.innerHTML = `Gasto= ${vServicios}`;
+    let selecedugas=document.getElementById("gas3edu");
+    selecedugas.innerHTML = `Gasto= ${vEducacion}`;
+    let selecotrgas=document.getElementById("gas3otr");
+    selecotrgas.innerHTML = `Gasto= ${vOtros}`;
+
+    }
    
-   console.log (vVivienda);
    
     
-}
+
 
 //listagastos= gastos.filter((element) => element.id != id);
