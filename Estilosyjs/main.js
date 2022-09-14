@@ -153,6 +153,7 @@ function limpiarform1(){
 }
 
 function limpiarform2(){
+    document.getElementById("id").value = "";
     document.getElementById("item").value = "";
     document.getElementById("descripcion").value = "";
     document.getElementById("monto").value = "";
@@ -206,20 +207,21 @@ function insertarpres(){
     }
 insertarpres();
 
-// sumas de filtros
+// sumas de filtros, actualiza los gastos 
 let buttonactgas3= document.getElementById('actgas3');
 buttonactgas3.addEventListener('click', (element) => insertarfiltergasto(element));
 
 function insertarfiltergasto(element){
     element.preventDefault();
-    console.log("funciona boton");
+    
    let gastos3=leerdatos('listadegasto');
+   console.log(gastos3);
    let vVivienda = gastos3.filter((element) => element.item == "Vivienda").reduce((a,b)=> a + Number (b.monto),0);
    let vTransporte=gastos3.filter((element)=>element.item == "Transporte").reduce((a,b)=> a + Number (b.monto),0);
-   let vAlimentacion=gastos3.filter((element)=>element.item == "Alimentacion").reduce((a,b)=> a + Number (b.monto),0);
+   let vAlimentacion=gastos3.filter((element)=>element.item == "Alimentación").reduce((a,b)=> a + Number (b.monto),0);
    let vOtros=gastos3.filter((element)=>element.item == "Otros").reduce((a,b)=> a + Number (b.monto),0);
-   let vServicios=gastos3.filter((element)=>element.item =="Servicios").reduce((a,b)=> a + Number (b.monto),0);
-   let vEducacion=gastos3.filter((element)=>element.item =="Educacion").reduce((a,b)=> a + Number (b.monto),0);
+   let vServicios=gastos3.filter((element)=>element.item =="Servicios Básicos").reduce((a,b)=> a + Number (b.monto),0);
+   let vEducacion=gastos3.filter((element)=>element.item =="Educación").reduce((a,b)=> a + Number (b.monto),0);
     
    let selecvivgas=document.getElementById("gas3viv");
     selecvivgas.innerHTML = `Gasto= ${vVivienda}`;
@@ -234,8 +236,8 @@ function insertarfiltergasto(element){
     let selecotrgas=document.getElementById("gas3otr");
     selecotrgas.innerHTML = `Gasto= ${vOtros}`;
 
+    
     }
-   
    
     
 

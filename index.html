@@ -18,14 +18,15 @@
 
 <body class="fondo">
     <!-- logo-->
-    <header class="d-flex justify-content-center">
+    <header class="d-flex justify-content-center" id="cabecera">
         <div>
-            <img src="/imagenes/logo2.png" alt="" />
+            <img class="logo" src="/imagenes/logo2.png" alt="" />
         </div>
     </header>
+<div>
     <!-- instrucciones-->
     <div class="d-flex justify-content-center">
-        <h2 class="m-5">Revisa el presupuesto familiar en tan sólo 3 pasos</h2>
+        <h2 class="m-5 text-center subtitulo">Revisa el presupuesto familiar en tan sólo 3 pasos</h2>
     </div>
 
 
@@ -135,10 +136,10 @@
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
                 data-bs-parent="#accordionExample">
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary mb-3 w-10" id="actgas3">Actualizar</button></div>
-                <div class="accordion-body d-flex flex-columns justify-content-center align-items-baseline">
+                    <button type="button" class="btn btn-primary m-3 w-10" id="actgas3">Actualizar</button></div>
+                <div class="accordion-body d-flex flex-columns flex-wrap justify-content-center align-items-baseline">
                     <div class="card m-2 align-items-center" style="width: 12rem;">
-                        <i class="fa-solid fa-house-user fa-5x"></i>
+                        <i class="fa-solid fa-house-user fa-5x icono"></i>
                         <div class="card-body" id="vivpres">
                             <h5 class="card-title">Vivienda</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
@@ -146,7 +147,7 @@
                         </div>
                     </div>
                     <div class="card m-2  align-items-center" style="width: 12rem;">
-                        <i class="fa-solid fa-bus fa-5x"></i>
+                        <i class="fa-solid fa-bus fa-5x icono"></i>
                         <div class="card-body" id="trapres">
                             <h5 class="card-title" >Transporte</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
@@ -154,7 +155,7 @@
                         </div>
                     </div>
                     <div class="card m-2 align-items-center" style="width: 12rem;">
-                        <i class="fa-solid fa-school fa-5x"></i>
+                        <i class="fa-solid fa-school fa-5x icono"></i>
                         <div class="card-body"id="edupres">
                             <h5 class="card-title">Educación</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
@@ -163,7 +164,7 @@
                     </div>
 
                     <div class="card m-2 align-items-center" style="width: 12rem;">
-                        <i class="fa-solid fa-bowl-food fa-5x"></i>
+                        <i class="fa-solid fa-bowl-food fa-5x icono"></i>
                         <div class="card-body"id="alipres">
                             <h5 class="card-title">Alimentación</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
@@ -172,7 +173,7 @@
                     </div>
 
                     <div class="card m-2 align-items-center" style="width: 12rem;">
-                        <i class="fa-solid fa-screwdriver-wrench fa-5x"></i>
+                        <i class="fa-solid fa-screwdriver-wrench fa-5x icono"></i>
                         <div class="card-body"id="serpres">
                             <h5 class="card-title">Servicios Básicos</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
@@ -181,7 +182,7 @@
                     </div>
 
                     <div class="card m-2 align-items-center" style="width: 12rem;">
-                        <i class="fa-solid fa-gear fa-5x"></i>
+                        <i class="fa-solid fa-gear fa-5x icono"></i>
                         <div class="card-body"id="otrpres">
                             <h5 class="card-title">Otros</h5>
                             <p class="card-text">Gasto/Presupuesto</p>
@@ -195,7 +196,7 @@
 
    
     <!-- Registro de gasto-->
-    <div class="p-3 m-4 bg-light table-striped text-white">
+    <div class="p-3 m-4 bg-light table-striped text-white table-responsive">
         <table class="table" id="tabladegasto">
             <thead>
                 <tr>
@@ -224,7 +225,17 @@
 
     </div>
 
+</div>
+<!-- Footer -->
+<footer class="footer">
+    <div class="d-flex flex-row  justify-content-around">
+        <a class="nav-link mb-2 mb-lg-0 p-3" aria-current="page" href="#cabecera">Inicio</a>
+        <a class="nav-link mb-2 mb-lg-0 p-3" href="#headingOne">Presupuesto </a>
+        <a class="nav-link mb-2 mb-lg-0 p-3" href="#tabladegasto">Tabla de gastos</a>
+
     </div>
+
+</footer>
     <!--local storage-->
 
     <!-- javaScript Main-->
