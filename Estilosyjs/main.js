@@ -32,7 +32,7 @@ function agregargasto (e)
     }
     
     else if (datogasto.id==0 || datogasto.id==null) {
-        datogasto.id=(listagastos.length +1);      
+        datogasto.id= listagastos.length? (listagastos[listagastos.length -1 ].id +1): 1;      
         listagastos.push(datogasto);
         //console.log( datogasto.id);
        
@@ -115,15 +115,18 @@ guadardatosls("listadegasto", listagastos);
 
 function editargasto(button, ide){
     let gastos= leerdatos('listadegasto');
-    let gastoeditado = gastos[ide -1];
     
-    id.value=gastoeditado.id;
+    let gastoeditado = gastos.find((element)=> element.id ==ide);
+    
+    
+    
+    id.value= gastoeditado.id;
     item.value = gastoeditado.item;
     monto.value = gastoeditado.monto;
     descripcion.value = gastoeditado.descripcion;
     fecha.value = gastoeditado.fecha;
     //console.log(id.value);
-    //console.log(gastoeditado);
+    
 
 }
 
@@ -158,21 +161,6 @@ function limpiarform2(){
 }
 
 
-
-
-
-//obtengo el dato, y agrego el gasto en la tabla
-
-
-//datos = obtener
-//validación
-/*let arrayobj=Object.values(gasto)
-if (arrayobj.lengh< 4){
-console.log ("hola")
-//}*/
-
-// ejecucion de funcion boton agregar gasto
-
 let buttonAgregarpres= document.getElementById('agregarpres');
 buttonAgregarpres.addEventListener('click', (a) => agregarpres(a));
 
@@ -188,25 +176,55 @@ function agregarpres (a)
     }
     
     else{
-        let selecvivpres=document.getElementById("vivpres");
-        selecvivpres.innerHTML = `<h5 class="card-title">Vivienda</h5>
-        <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Vivienda}</p>`;
-        let selecedupres=document.getElementById("edupres");
-        selecedupres.innerHTML = `<h5 class="card-title">Educación</h5>
-        <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Educacion}</p>`;
-        let selecalipres=document.getElementById("alipres");
-        selecalipres.innerHTML = `<h5 class="card-title">Alimentación</h5>
-        <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Alimentacion}</p>`;
-        let selecotrpres=document.getElementById("otrpres");
-        selecotrpres.innerHTML = `<h5 class="card-title">Otros</h5>
-        <p class=card-text">Gasto <p>Presupuesto= ${presupuesto.Otros}</p>`;
-        let selecserpres=document.getElementById("serpres");
-        selecserpres.innerHTML = `<h5 class="card-title">Servicios</h5>
-        <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Servicios}</p>`;
-        let selectrapres=document.getElementById("trapres");
-        selectrapres.innerHTML = `<h5 class="card-title">Transporte</h5>
-        <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Transporte}</p>`;
+        guadardatosls("presupuestos", presupuesto);
+        insertarpres();
+        
     };
         
 }
 
+function insertarpres(){
+    presupuesto= leerdatos('presupuestos'); 
+    let selecvivpres=document.getElementById("vivpres");
+    selecvivpres.innerHTML = `<h5 class="card-title">Vivienda</h5>
+    <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Vivienda}</p>`;
+    let selecedupres=document.getElementById("edupres");
+    selecedupres.innerHTML = `<h5 class="card-title">Educación</h5>
+    <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Educacion}</p>`;
+    let selecalipres=document.getElementById("alipres");
+    selecalipres.innerHTML = `<h5 class="card-title">Alimentación</h5>
+    <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Alimentacion}</p>`;
+    let selecotrpres=document.getElementById("otrpres");
+    selecotrpres.innerHTML = `<h5 class="card-title">Otros</h5>
+    <p class=card-text">Gasto <p>Presupuesto= ${presupuesto.Otros}</p>`;
+    let selecserpres=document.getElementById("serpres");
+    selecserpres.innerHTML = `<h5 class="card-title">Servicios</h5>
+    <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Servicios}</p>`;
+    let selectrapres=document.getElementById("trapres");
+    selectrapres.innerHTML = `<h5 class="card-title">Transporte</h5>
+    <p class="card-text">Gasto <p>Presupuesto= ${presupuesto.Transporte}</p>`;
+    }
+insertarpres();
+
+// sumas de filtros
+let buttonactgas3= document.getElementById('actgas3');
+buttonactgas3.addEventListener('click', (element) => insertarfiltergasto(element));
+
+function insertarfiltergasto(element){
+    element.preventDefault();
+    console.log("funciona boton");
+   let gastos3=leerdatos('listadegasto');
+   let vVivienda = gastos3.filter((element) => element.item == "Vivienda").reduce((a,b)=> a + Number (b.monto),0);
+   let vTransporte=gastos3.filter((element)=>element.item == "Transporte");
+   let vAlimentacion=gastos3.filter((element)=>element.item == "Alimentacion");
+   let vOtros=gastos3.filter((element)=>element.item == "Otros");
+   let vServicios=gastos3.filter((element)=>element.item =="Servicios");
+   let vEducacion=gastos3.filter((element)=>element.item =="Educacion");
+    
+   
+   console.log (vVivienda);
+   
+    
+}
+
+//listagastos= gastos.filter((element) => element.id != id);
