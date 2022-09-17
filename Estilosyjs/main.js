@@ -28,7 +28,7 @@ function agregargasto (e)
     let datogasto=obtener();
     //console.log( datogasto.id);
     if( datogasto.item=="" || datogasto.descripcion==""||datogasto.fecha==""||datogasto.monto==""){
-        alert("no pueden existir campos vacios");
+        Swal.fire('No pueden existir campos vacios');
     }
     
     else if (datogasto.id==0 || datogasto.id==null) {
@@ -173,12 +173,17 @@ function agregarpres (a)
     let presupuesto=obtenerPres();
     
     if( presupuesto.Vivienda=="" || presupuesto.Transporte==""||presupuesto.Alimentacion==""||presupuesto.Educacion==""||presupuesto.Otros==""||presupuesto.Servicios==""){
-        alert("no pueden existir campos vacios");
+        Swal.fire('No pueden existir campos vacios');
     }
     
     else{
         guadardatosls("presupuestos", presupuesto);
         insertarpres();
+        Swal.fire(
+            'Se ha actualizado!',
+            '',
+            'success'
+          );
         
     };
         
@@ -188,22 +193,22 @@ function insertarpres(){
     presupuesto= leerdatos('presupuestos'); 
     let selecvivpres=document.getElementById("vivpres");
     selecvivpres.innerHTML = `<h5 class="card-title">Vivienda</h5>
-    <p class="card-text" id="gas3viv">Gasto <p>Presupuesto= ${presupuesto.Vivienda}</p>`;
+    <p class="card-text" id="gas3viv">Gasto <p>Presupuesto= ${presupuesto.Vivienda || 0}</p>`;
     let selecedupres=document.getElementById("edupres");
     selecedupres.innerHTML = `<h5 class="card-title">Educación</h5>
-    <p class="card-text" id="gas3edu">Gasto <p>Presupuesto= ${presupuesto.Educacion}</p>`;
+    <p class="card-text" id="gas3edu">Gasto <p>Presupuesto= ${presupuesto.Educacion || 0}</p>`;
     let selecalipres=document.getElementById("alipres");
     selecalipres.innerHTML = `<h5 class="card-title">Alimentación</h5>
-    <p class="card-text" id="gas3ali">Gasto <p>Presupuesto= ${presupuesto.Alimentacion}</p>`;
+    <p class="card-text" id="gas3ali">Gasto <p>Presupuesto= ${presupuesto.Alimentacion || 0}</p>`;
     let selecotrpres=document.getElementById("otrpres");
     selecotrpres.innerHTML = `<h5 class="card-title">Otros</h5>
-    <p class=card-text" id="gas3otr">Gasto <p>Presupuesto= ${presupuesto.Otros}</p>`;
+    <p class=card-text" id="gas3otr">Gasto <p>Presupuesto= ${presupuesto.Otros || 0}</p>`;
     let selecserpres=document.getElementById("serpres");
     selecserpres.innerHTML = `<h5 class="card-title">Servicios</h5>
-    <p class="card-text"id="gas3ser">Gasto <p>Presupuesto= ${presupuesto.Servicios}</p>`;
+    <p class="card-text"id="gas3ser">Gasto <p>Presupuesto= ${presupuesto.Servicios || 0}</p>`;
     let selectrapres=document.getElementById("trapres");
     selectrapres.innerHTML = `<h5 class="card-title">Transporte</h5>
-    <p class="card-text" id="gas3tra">Gasto <p>Presupuesto= ${presupuesto.Transporte}</p>`;
+    <p class="card-text" id="gas3tra">Gasto <p>Presupuesto= ${presupuesto.Transporte || 0}</p>`;
     }
 insertarpres();
 
@@ -235,7 +240,11 @@ function insertarfiltergasto(element){
     selecedugas.innerHTML = `Gasto= ${vEducacion}`;
     let selecotrgas=document.getElementById("gas3otr");
     selecotrgas.innerHTML = `Gasto= ${vOtros}`;
-
+    Swal.fire(
+        'Se ha actualizado!',
+        '',
+        'success'
+      );
     
     }
    
